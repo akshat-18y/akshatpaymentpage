@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Details - Akshat Shukla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #333;
+        }
+        .payment-card {
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px; padding: 40px 30px; width: 100%; max-width: 350px; text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.6); margin: 20px;
+        }
+        h2 { font-size: 1.3rem; font-weight: 600; color: #1a202c; margin-bottom: 20px; }
+        
+        /* Detail Boxes */
+        .detail-box {
+            background: #f7fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 12px;
+            margin-bottom: 15px; text-align: left; position: relative; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .detail-box:hover { border-color: #cbd5e0; background: #fff; }
+        .detail-box:active { transform: scale(0.98); }
+        
+        .label { font-size: 0.7rem; color: #718096; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; display: block; margin-bottom: 4px; }
+        .value { font-size: 0.95rem; color: #2d3748; font-weight: 500; font-family: 'Poppins', monospace; /* Monospace makes numbers easier to read */ }
+        
+        .copy-icon {
+            position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+            color: #a0aec0; font-size: 1rem;
+        }
+
+        .back-btn {
+            display: inline-block; margin-top: 10px; color: #718096; text-decoration: none;
+            font-size: 0.9rem; font-weight: 500;
+        }
+        .back-btn:hover { color: #2d3748; text-decoration: underline; }
+
+        /* Toast Notification for Copy */
+        .toast {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #2d3748; color: white; padding: 10px 20px; border-radius: 50px;
+            font-size: 0.85rem; opacity: 0; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2); pointer-events: none;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="payment-card">
+        <h2>Bank Details</h2>
+        
+        <div class="detail-box" onclick="copyText('Akshat Shukla', 'Name Copied!')">
+            <span class="label">Account Holder Name</span>
+            <span class="value">AKSHAT SHUKLA</span>
+            <i class="fa-regular fa-copy copy-icon"></i>
+        </div>
+
+        <div class="detail-box">
+            <span class="label">Bank Name</span>
+            <span class="value">STATE BANK OF INDIA</span>
+            </div>
+
+        <div class="detail-box" onclick="copyText('ENTER_ACCOUNT_NUMBER_HERE', 'Account Number Copied!')">
+            <span class="label">Account Number</span>
+            <span class="value">40454651436</span>
+            <i class="fa-regular fa-copy copy-icon"></i>
+        </div>
+
+        <div class="detail-box" onclick="copyText('ENTER_IFSC_CODE_HERE', 'IFSC Copied!')">
+            <span class="label">IFSC Code</span>
+            <span class="value">SBIN0013766</span>
+            <i class="fa-regular fa-copy copy-icon"></i>
+        </div>
+
+        <a href="index.html" class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to UPI
+        </a>
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+        function copyText(text, successMessage) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById("toast");
+                toast.innerText = successMessage || "Copied!";
+                toast.classList.add("show");
+                
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 2500);
+            });
+        }
+    </script>
+
+</body>
+</html>

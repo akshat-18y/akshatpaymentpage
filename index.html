@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Akshat Shukla</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body {
+            display: flex; justify-content: center; align-items: center; min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #333;
+        }
+        .payment-card {
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px; padding: 40px 30px; width: 100%; max-width: 350px; text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.6); margin: 20px;
+        }
+        .profile-section h2 { font-size: 1.3rem; font-weight: 600; color: #1a202c; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .profile-section p { color: #718096; font-size: 0.8rem; margin-bottom: 20px; }
+        .qr-container {
+            background: #fff; padding: 10px; border-radius: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            display: inline-block; margin-bottom: 20px; border: 1px solid #f7fafc;
+        }
+        .qr-container img { width: 100%; max-width: 160px; height: auto; display: block; border-radius: 8px; }
+        .upi-box {
+            background: transparent; border: 1px solid #e2e8f0; padding: 8px 14px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 500; color: #718096; cursor: pointer; transition: all 0.2s ease;
+            position: relative; margin-bottom: 20px; display: flex; justify-content: center; align-items: center;
+            gap: 8px; width: fit-content; margin-left: auto; margin-right: auto;
+        }
+        .upi-box:hover { border-color: #a0aec0; color: #2d3748; }
+        .pay-btn {
+            display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%;
+            background-color: #1a202c; color: white; text-decoration: none; padding: 14px 0; border-radius: 12px;
+            font-size: 1rem; font-weight: 500; margin-bottom: 15px; /* Reduced margin */
+            transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .pay-btn:hover { transform: translateY(-2px); background-color: #000; box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+        
+        /* NEW BANK LINK STYLE */
+        .bank-link {
+            display: block; font-size: 0.75rem; color: #718096; text-decoration: underline;
+            margin-bottom: 25px; cursor: pointer; transition: color 0.2s;
+        }
+        .bank-link:hover { color: #2d3748; }
+
+        .tooltip {
+            position: absolute; top: -30px; left: 50%; transform: translateX(-50%); background: #2d3748;
+            color: white; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; opacity: 0;
+            transition: opacity 0.2s; pointer-events: none; white-space: nowrap;
+        }
+        .tooltip.show { opacity: 1; }
+        .footer-nav { display: flex; justify-content: center; gap: 15px; padding-top: 15px; border-top: 1px solid #edf2f7; }
+        .nav-btn { color: #cbd5e0; font-size: 1.3rem; text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { transform: scale(1.1); }
+        .nav-btn.whatsapp:hover { color: #25D366; }
+        .nav-btn.instagram:hover { color: #E1306C; }
+    </style>
+</head>
+<body>
+
+    <div class="payment-card">
+        <div class="profile-section">
+            <h2>Akshat Shukla</h2>
+            <p>Scan or click below to pay</p>
+        </div>
+
+        <div class="qr-container">
+            <img src="qr.jpeg" alt="UPI QR Code">
+        </div>
+
+        <div class="upi-box" onclick="copyUPI()">
+            <span id="upi-text">aaravshukla417@oksbi</span>
+            <i class="fa-regular fa-copy"></i>
+            <div class="tooltip" id="copy-tooltip">Copied!</div>
+        </div>
+
+        <a href="upi://pay?pa=aaravshukla417@oksbi&pn=Akshat%20Shukla&cu=INR" class="pay-btn">
+            <span>Pay Now</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+        <a href="bank-details.html" class="bank-link">Don't have UPI? Click for Bank Details</a>
+
+        <div class="footer-nav">
+            <a href="https://wa.link/gn9i64" class="nav-btn whatsapp" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+
+            <a href="https://www.instagram.com/akshatoholic?igsh=YmYzcm55czdnNnJk" class="nav-btn instagram" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function copyUPI() {
+            const upiText = document.getElementById("upi-text").innerText;
+            navigator.clipboard.writeText(upiText).then(() => {
+                const tooltip = document.getElementById("copy-tooltip");
+                tooltip.classList.add("show");
+                const box = document.querySelector(".upi-box");
+                box.style.borderColor = "#48bb78"; box.style.color = "#2f855a";
+                setTimeout(() => {
+                    tooltip.classList.remove("show");
+                    box.style.borderColor = "#e2e8f0"; box.style.color = "#718096";
+                }, 2000);
+            });
+        }
+    </script>
+
+</body>
+</html>
